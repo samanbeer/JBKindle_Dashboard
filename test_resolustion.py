@@ -1,5 +1,6 @@
+# you can run this script on your kindle to see which resolution you have
 import os
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont # type: ignore
 
 def draw_calibration():
     width = 1264
@@ -13,12 +14,12 @@ def draw_calibration():
         draw.line([(x, 0), (x, height)], fill="gray", width=1)
     for y in range(100, height, 100):
         draw.line([(0, y), (width, y)], fill="gray", width=1)
-        
+#you can add your own resolution if none of the basic types matches
     resolutions = [
         (1264, 1680),
         (1236, 1648),
         (1200, 1600),
-        (1072, 1448), # this one i have
+        (1072, 1448), # this one i have on Kindle PaperWhite Gen11 
         (800, 1024)
     ]
     
@@ -35,7 +36,7 @@ def draw_calibration():
         image.paste(t_img, (w - (txt_w * 4) - 20, h - 60))
         image.paste(t_img, (20, h - 60))
 
-    png_path = "/mnt/us/dashboard.png"
+    png_path = "/mnt/us/dashboard.png" # also if your kindle does not have "user" partition in /mnt/us/ you should edit it.
     image.save(png_path, "PNG")
     
     os.system("eips -c")
